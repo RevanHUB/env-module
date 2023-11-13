@@ -7,8 +7,17 @@ export default class Data {
     static setEnvironment = async () => {
         await env().then((res) => {
             Data.environment = res;
-            let entorno = res.split("=");
-            entorno.reduce((acc, curr) => this.entorno[acc] = curr);
+
+            let variables = res.split(";");
+
+            variables.forEach(line => {
+                let entorno = line.split("=");
+                // console.log(entorno);
+                entorno.reduce((acc, curr) => this.entorno[acc] = curr);
+            });
+            
+            
+            
         })
     }
 
